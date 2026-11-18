@@ -1,0 +1,68 @@
+{
+  "job_id": "job_1792939532956",
+  "status": "COMPLETED_SUCCESS",
+  "timestamp": "2026-10-25T14:45:46.738Z",
+  "title": "The Silence We Keep",
+  "hook": "Some people leave without making a sound.",
+  "category": "Solitude & Self-Discovery",
+  "script": "We spend our whole lives trying to be understood by strangers... forgetting that the quietest moments are often the most honest. You don't need an audience to heal. Sometimes, the most sacred room you'll ever enter... is the one inside your own peace.",
+  "duration_seconds": 19.92,
+  "voice": "en-US-ChristopherNeural",
+  "scene_cuts_count": 4,
+  "scenes": [
+    {
+      "scene_id": "scene_1",
+      "visual_file": "night_moon.jpg",
+      "start_time_sec": 0,
+      "end_time_sec": 4.98,
+      "duration_sec": 4.98,
+      "camera_motion": "slow_zoom_in",
+      "ambient_soundtrack": "gymnopedie.ogg"
+    },
+    {
+      "scene_id": "scene_2",
+      "visual_file": "rain_night.jpg",
+      "start_time_sec": 4.98,
+      "end_time_sec": 9.96,
+      "duration_sec": 4.98,
+      "camera_motion": "slow_pan_drift",
+      "ambient_soundtrack": "gymnopedie.ogg"
+    },
+    {
+      "scene_id": "scene_3",
+      "visual_file": "candle_night.jpg",
+      "start_time_sec": 9.96,
+      "end_time_sec": 14.94,
+      "duration_sec": 4.98,
+      "camera_motion": "slow_zoom_in",
+      "ambient_soundtrack": "gymnopedie.ogg"
+    },
+    {
+      "scene_id": "scene_4",
+      "visual_file": "starry_sky.jpg",
+      "start_time_sec": 14.94,
+      "end_time_sec": 19.92,
+      "duration_sec": 4.98,
+      "camera_motion": "slow_pan_drift",
+      "ambient_soundtrack": "gymnopedie.ogg"
+    }
+  ],
+  "music": "gymnopedie.ogg",
+  "hashtags": [
+    "#whisprs",
+    "#poetry",
+    "#solitude",
+    "#healing",
+    "#innerpeace",
+    "#quotes",
+    "#reels"
+  ],
+  "caption": "Some people leave without making a sound.\n\nThe Silence We Keep\n\n\"We spend our whole lives trying to be understood by strangers... forgetting that the quietest moments are often the most honest. You don't need an audience to heal. Sometimes, the most sacred room you'll ever enter... is the one inside your own peace.\"\n\nFollow @Whisprs for quiet reminders and late-night thoughts. 🖤\n\n#whisprs #poetry #solitude #healing #innerpeace #quotes #reels",
+  "artifacts": {
+    "video_mp4": "C:\\Users\\majji\\whisprs_video_studio\\output\\job_1792939532956.mp4",
+    "thumbnail_jpg": "C:\\Users\\majji\\whisprs_video_studio\\output\\job_1792939532956_thumb.jpg",
+    "subtitles_ass": "C:\\Users\\majji\\whisprs_video_studio\\jobs\\job_1792939532956\\subtitles.ass",
+    "narration_mp3": "C:\\Users\\majji\\whisprs_video_studio\\jobs\\job_1792939532956\\narration.mp3",
+    "storyboard_json": "C:\\Users\\majji\\whisprs_video_studio\\jobs\\job_1792939532956\\storyboard.json"
+  }
+}

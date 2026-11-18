@@ -1,0 +1,168 @@
+{
+  "used_speeches": [
+    {
+      "job_id": "whisprs_v4_cloned_master_1794953194059",
+      "script": "slow down. ... breathe. ... it is okay to rest. ... not everything needs to be carried. ... right now. ... be gentle with yourself. ... you are doing better than you know.",
+      "timestamp": "2026-11-17T22:07:50.534Z"
+    },
+    {
+      "job_id": "job_flow_qwen_1794953517524",
+      "script": "slow down. ... breathe. ... it is okay to rest. ... not everything needs to be carried. ... right now. ... be gentle with yourself. ... you are doing better than you know.",
+      "timestamp": "2026-11-17T22:12:50.309Z"
+    },
+    {
+      "job_id": "whisprs_cloned_original_fixed_1794957170296",
+      "script": "you don't have to carry the weight of everything - because some things were never meant to be held - and when you feel tired in a world that never stops - remember that healing is just learning to breathe - so let your heavy thoughts rest - tomorrow will be kinder",
+      "timestamp": "2026-11-17T23:13:34.339Z"
+    },
+    {
+      "job_id": "job_flow_qwen_1794957412157",
+      "script": "you don't have to carry the weight of everything - because some things were never meant to be held - and when you feel tired in a world that never stops - remember that healing is just learning to breathe - so let your heavy thoughts rest - tomorrow will be kinder",
+      "timestamp": "2026-11-17T23:17:34.678Z"
+    },
+    {
+      "job_id": "whisprs_cloned_slow5_master_1794958363184",
+      "script": "you don't have to carry the weight of everything - because some things were never meant to be held - and when you feel tired in a world that never stops - remember that healing is just learning to breathe - so let your heavy thoughts rest - tomorrow will be kinder",
+      "timestamp": "2026-11-17T23:32:55.489Z"
+    }
+  ],
+  "used_images": [
+    {
+      "job_id": "whisprs_v4_cloned_master_1794953194059",
+      "file": "C:\\Users\\majji\\flow-mcp-out\\WhisprsBatchFresh1\\scene-01.jpeg",
+      "timestamp": "2026-11-17T22:07:50.638Z"
+    },
+    {
+      "job_id": "whisprs_v4_cloned_master_1794953194059",
+      "file": "C:\\Users\\majji\\flow-mcp-out\\WhisprsBatchFresh1\\scene-02.jpeg",
+      "timestamp": "2026-11-17T22:07:50.638Z"
+    },
+    {
+      "job_id": "whisprs_v4_cloned_master_1794953194059",
+      "file": "C:\\Users\\majji\\flow-mcp-out\\WhisprsBatchFresh1\\scene-03.jpeg",
+      "timestamp": "2026-11-17T22:07:50.638Z"
+    },
+    {
+      "job_id": "whisprs_v4_cloned_master_1794953194059",
+      "file": "C:\\Users\\majji\\flow-mcp-out\\WhisprsBatchFresh1\\scene-04.jpeg",
+      "timestamp": "2026-11-17T22:07:50.638Z"
+    },
+    {
+      "job_id": "job_flow_qwen_1794953517524",
+      "file": "C:\\Users\\majji\\flow-mcp-out\\WhisprsBatchFresh1\\scene-01.jpeg",
+      "timestamp": "2026-11-17T22:12:50.639Z"
+    },
+    {
+      "job_id": "job_flow_qwen_1794953517524",
+      "file": "C:\\Users\\majji\\flow-mcp-out\\WhisprsBatchFresh1\\scene-02.jpeg",
+      "timestamp": "2026-11-17T22:12:50.639Z"
+    },
+    {
+      "job_id": "job_flow_qwen_1794953517524",
+      "file": "C:\\Users\\majji\\flow-mcp-out\\WhisprsBatchFresh1\\scene-03.jpeg",
+      "timestamp": "2026-11-17T22:12:50.639Z"
+    },
+    {
+      "job_id": "job_flow_qwen_1794953517524",
+      "file": "C:\\Users\\majji\\flow-mcp-out\\WhisprsBatchFresh1\\scene-04.jpeg",
+      "timestamp": "2026-11-17T22:12:50.639Z"
+    },
+    {
+      "job_id": "whisprs_cloned_original_fixed_1794957170296",
+      "file": "C:\\Users\\majji\\flow-mcp-out\\WhisprsBatchFresh2\\scene-01.jpeg",
+      "timestamp": "2026-11-17T23:13:34.340Z"
+    },
+    {
+      "job_id": "whisprs_cloned_original_fixed_1794957170296",
+      "file": "C:\\Users\\majji\\flow-mcp-out\\WhisprsBatchFresh2\\scene-02.jpeg",
+      "timestamp": "2026-11-17T23:13:34.340Z"
+    },
+    {
+      "job_id": "whisprs_cloned_original_fixed_1794957170296",
+      "file": "C:\\Users\\majji\\flow-mcp-out\\WhisprsBatchFresh2\\scene-03.jpeg",
+      "timestamp": "2026-11-17T23:13:34.340Z"
+    },
+    {
+      "job_id": "whisprs_cloned_original_fixed_1794957170296",
+      "file": "C:\\Users\\majji\\flow-mcp-out\\WhisprsBatchFresh2\\scene-04.jpeg",
+      "timestamp": "2026-11-17T23:13:34.340Z"
+    },
+    {
+      "job_id": "job_flow_qwen_1794957412157",
+      "file": "C:\\Users\\majji\\flow-mcp-out\\WhisprsBatchFresh2\\scene-01.jpeg",
+      "timestamp": "2026-11-17T23:17:34.681Z"
+    },
+    {
+      "job_id": "job_flow_qwen_1794957412157",
+      "file": "C:\\Users\\majji\\flow-mcp-out\\WhisprsBatchFresh2\\scene-02.jpeg",
+      "timestamp": "2026-11-17T23:17:34.681Z"
+    },
+    {
+      "job_id": "job_flow_qwen_1794957412157",
+      "file": "C:\\Users\\majji\\flow-mcp-out\\WhisprsBatchFresh2\\scene-03.jpeg",
+      "timestamp": "2026-11-17T23:17:34.681Z"
+    },
+    {
+      "job_id": "job_flow_qwen_1794957412157",
+      "file": "C:\\Users\\majji\\flow-mcp-out\\WhisprsBatchFresh2\\scene-04.jpeg",
+      "timestamp": "2026-11-17T23:17:34.681Z"
+    },
+    {
+      "job_id": "whisprs_cloned_slow5_master_1794958363184",
+      "file": "C:\\Users\\majji\\flow-mcp-out\\WhisprsBatchFresh3\\scene-01.jpeg",
+      "timestamp": "2026-11-17T23:32:55.489Z"
+    },
+    {
+      "job_id": "whisprs_cloned_slow5_master_1794958363184",
+      "file": "C:\\Users\\majji\\flow-mcp-out\\WhisprsBatchFresh3\\scene-02.jpeg",
+      "timestamp": "2026-11-17T23:32:55.490Z"
+    },
+    {
+      "job_id": "whisprs_cloned_slow5_master_1794958363184",
+      "file": "C:\\Users\\majji\\flow-mcp-out\\WhisprsBatchFresh3\\scene-03.jpeg",
+      "timestamp": "2026-11-17T23:32:55.490Z"
+    },
+    {
+      "job_id": "whisprs_cloned_slow5_master_1794958363184",
+      "file": "C:\\Users\\majji\\flow-mcp-out\\WhisprsBatchFresh3\\scene-04.jpeg",
+      "timestamp": "2026-11-17T23:32:55.490Z"
+    }
+  ],
+  "jobs": [
+    {
+      "job_id": "whisprs_v4_cloned_master_1794953194059",
+      "duration": 28.4840589569161,
+      "created_at": "2026-11-17T22:07:50.638Z",
+      "video_path": "C:\\Users\\majji\\whisprs_video_studio\\output\\whisprs_v4_cloned_master_1794953194059.mp4",
+      "thumbnail_path": "C:\\Users\\majji\\whisprs_video_studio\\output\\whisprs_v4_cloned_master_1794953194059_thumb.jpg"
+    },
+    {
+      "job_id": "job_flow_qwen_1794953517524",
+      "duration": 28.4840589569161,
+      "created_at": "2026-11-17T22:12:50.639Z",
+      "video_path": "C:\\Users\\majji\\whisprs_video_studio\\output\\job_flow_qwen_1794953517524.mp4",
+      "thumbnail_path": "C:\\Users\\majji\\whisprs_video_studio\\output\\job_flow_qwen_1794953517524_thumb.jpg"
+    },
+    {
+      "job_id": "whisprs_cloned_original_fixed_1794957170296",
+      "duration": 21.349916666666665,
+      "created_at": "2026-11-17T23:13:34.340Z",
+      "video_path": "C:\\Users\\majji\\whisprs_video_studio\\output\\whisprs_cloned_original_fixed_1794957170296.mp4",
+      "thumbnail_path": "C:\\Users\\majji\\whisprs_video_studio\\output\\whisprs_cloned_original_fixed_1794957170296_thumb.jpg"
+    },
+    {
+      "job_id": "job_flow_qwen_1794957412157",
+      "duration": 21.349916666666665,
+      "created_at": "2026-11-17T23:17:34.681Z",
+      "video_path": "C:\\Users\\majji\\whisprs_video_studio\\output\\job_flow_qwen_1794957412157.mp4",
+      "thumbnail_path": "C:\\Users\\majji\\whisprs_video_studio\\output\\job_flow_qwen_1794957412157_thumb.jpg"
+    },
+    {
+      "job_id": "whisprs_cloned_slow5_master_1794958363184",
+      "duration": 21.978833333333334,
+      "created_at": "2026-11-17T23:32:55.490Z",
+      "video_path": "C:\\Users\\majji\\whisprs_video_studio\\output\\whisprs_cloned_slow5_master_1794958363184.mp4",
+      "thumbnail_path": "C:\\Users\\majji\\whisprs_video_studio\\output\\whisprs_cloned_slow5_master_1794958363184_thumb.jpg"
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "job_id": "job_1792939532956",
+  "title": "The Silence We Keep",
+  "hook": "Some people leave without making a sound.",
+  "total_duration_sec": 19.92,
+  "scenes": [
+    {
+      "scene_id": "scene_1",
+      "visual_file": "night_moon.jpg",
+      "start_time_sec": 0,
+      "end_time_sec": 4.98,
+      "duration_sec": 4.98,
+      "camera_motion": "slow_zoom_in",
+      "ambient_soundtrack": "gymnopedie.ogg"
+    },
+    {
+      "scene_id": "scene_2",
+      "visual_file": "rain_night.jpg",
+      "start_time_sec": 4.98,
+      "end_time_sec": 9.96,
+      "duration_sec": 4.98,
+      "camera_motion": "slow_pan_drift",
+      "ambient_soundtrack": "gymnopedie.ogg"
+    },
+    {
+      "scene_id": "scene_3",
+      "visual_file": "candle_night.jpg",
+      "start_time_sec": 9.96,
+      "end_time_sec": 14.94,
+      "duration_sec": 4.98,
+      "camera_motion": "slow_zoom_in",
+      "ambient_soundtrack": "gymnopedie.ogg"
+    },
+    {
+      "scene_id": "scene_4",
+      "visual_file": "starry_sky.jpg",
+      "start_time_sec": 14.94,
+      "end_time_sec": 19.92,
+      "duration_sec": 4.98,
+      "camera_motion": "slow_pan_drift",
+      "ambient_soundtrack": "gymnopedie.ogg"
+    }
+  ]
+}

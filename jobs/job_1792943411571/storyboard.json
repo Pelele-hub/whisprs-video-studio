@@ -1,0 +1,44 @@
+{
+  "job_id": "job_1792943411571",
+  "title": "The Quiet You Carry",
+  "hook": "We never know how much someone is holding.",
+  "total_duration_sec": 23.088,
+  "scenes": [
+    {
+      "scene_id": "scene_1",
+      "visual_file": "whisprs_scene_1_flowers.jpg",
+      "start_time_sec": 0,
+      "end_time_sec": 5.77,
+      "duration_sec": 5.77,
+      "camera_motion": "slow_zoom_in",
+      "ambient_soundtrack": "gymnopedie.ogg"
+    },
+    {
+      "scene_id": "scene_2",
+      "visual_file": "whisprs_scene_2_balcony.jpg",
+      "start_time_sec": 5.77,
+      "end_time_sec": 11.54,
+      "duration_sec": 5.77,
+      "camera_motion": "slow_pan_drift",
+      "ambient_soundtrack": "gymnopedie.ogg"
+    },
+    {
+      "scene_id": "scene_3",
+      "visual_file": "whisprs_scene_3_guitar.jpg",
+      "start_time_sec": 11.54,
+      "end_time_sec": 17.32,
+      "duration_sec": 5.77,
+      "camera_motion": "slow_zoom_in",
+      "ambient_soundtrack": "gymnopedie.ogg"
+    },
+    {
+      "scene_id": "scene_4",
+      "visual_file": "whisprs_scene_4_rain.jpg",
+      "start_time_sec": 17.32,
+      "end_time_sec": 23.09,
+      "duration_sec": 5.77,
+      "camera_motion": "slow_pan_drift",
+      "ambient_soundtrack": "gymnopedie.ogg"
+    }
+  ]
+}

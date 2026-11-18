@@ -1,0 +1,56 @@
+{
+  "profile_name": "Whisprs Viral Poetry 2.0",
+  "version": "2.0.0",
+  "aspect_ratio": "9:16",
+  "target_resolution": {
+    "width": 1080,
+    "height": 1920
+  },
+  "target_duration_range": [16, 23],
+  "pacing": {
+    "shot_duration_seconds": [2.5, 3.8],
+    "cuts_per_video": [4, 6],
+    "camera_motion": "ken_burns_continuous_drift",
+    "motion_scale_factor": 1.15
+  },
+  "typography": {
+    "font_family": "Georgia",
+    "font_weight": "Bold",
+    "font_size_px": 54,
+    "primary_color_hex": "#FFFFFF",
+    "outline_color_hex": "#000000",
+    "outline_width_px": 3,
+    "shadow_depth_px": 2,
+    "alignment": "bottom_center",
+    "safe_margin_bottom_px": 340,
+    "safe_margin_side_px": 60,
+    "max_words_per_line": 5
+  },
+  "branding": {
+    "watermark_enabled": false,
+    "watermark_text": null,
+    "allow_logos_or_watermarks": false,
+    "visual_cleanliness_rule": "Strictly no watermarks, signatures, logos, or text on images or video renders"
+  },
+  "audio": {
+    "narration_speech_rate": "-12%",
+    "script_cadence_guidelines": "config/SPEECH_CADENCE_GUIDELINES.md",
+    "no_hard_punctuation": true,
+    "lowercase_only": true,
+    "micro_pause_symbols": ["...", "-"],
+    "target_word_count_range": [40, 50],
+    "dialogue_target_peak_db": -1.0,
+    "background_music_ducking_db": -17.5,
+    "integrated_loudness_target_lufs": -16.0,
+    "outro_music_linger_seconds": 1.8,
+    "music_fade_in_seconds": 0.8,
+    "music_fade_out_seconds": 2.0
+  },
+  "content_pillars": [
+    "Solitude & Self-Discovery",
+    "Unspoken Feelings & Goodbyes",
+    "Late Night Epiphanies",
+    "Silent Battles & Healing",
+    "The Cosmic Perspective"
+  ]
+}

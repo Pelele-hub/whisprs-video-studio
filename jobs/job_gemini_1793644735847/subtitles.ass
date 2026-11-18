@@ -1,0 +1,26 @@
+[Script Info]
+Title: Whisprs Gemini Synchronized Subtitles
+ScriptType: v4.00+
+WrapStyle: 0
+ScaledBorderAndShadow: yes
+YCbCr Matrix: None
+PlayResX: 1080
+PlayResY: 1920
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: WhisprsItalic,Georgia,50,&H00FFFFFF,&H0000FFFF,&H80000000,&H90000000,0,1,0,0,100,100,0.8,0,1,1.2,2.5,2,80,80,900,1
+Style: WhisprsWatermark,Segoe Script,28,&H70FFFFFF,&H0000FFFF,&H00000000,&H80000000,0,1,0,0,100,100,1.0,0,1,1.0,1.5,2,80,80,260,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.00,0:0:00:25.77,WhisprsWatermark,,0,0,0,,@Whisprs
+Dialogue: 0,0:00:00.00,0:00:03.11,WhisprsItalic,,0,0,0,,{\i1}It's late, and the\Nworld is finally quiet.
+Dialogue: 0,0:00:03.57,0:00:06.31,WhisprsItalic,,0,0,0,,{\i1}If nobody told you\Ntoday, you did good.
+Dialogue: 0,0:00:06.81,0:00:09.40,WhisprsItalic,,0,0,0,,{\i1}You survived things you\Nnever thought you could,
+Dialogue: 0,0:00:09.58,0:00:11.10,WhisprsItalic,,0,0,0,,{\i1}and you are still standing.
+Dialogue: 0,0:00:11.67,0:00:13.18,WhisprsItalic,,0,0,0,,{\i1}Take off the heavy armor.
+Dialogue: 0,0:00:13.58,0:00:15.44,WhisprsItalic,,0,0,0,,{\i1}Turn down the noise\Nin your head.
+Dialogue: 0,0:00:15.88,0:00:19.40,WhisprsItalic,,0,0,0,,{\i1}Tonight, you don't have to\Nprove anything to anyone.
+Dialogue: 0,0:00:20.02,0:00:22.62,WhisprsItalic,,0,0,0,,{\i1}Let the world spin without\Nyou for a few hours.
+Dialogue: 0,0:00:23.18,0:00:24.46,WhisprsItalic,,0,0,0,,{\i1}You're going to be okay.

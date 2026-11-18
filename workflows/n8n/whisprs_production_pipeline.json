@@ -1,0 +1,196 @@
+{
+  "name": "Whisprs Autonomous Video Production Pipeline",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 12
+            }
+          ]
+        }
+      },
+      "id": "node-schedule-trigger",
+      "name": "Schedule Trigger (Daily 12h)",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        180,
+        240
+      ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "generate-whisprs",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "node-webhook-trigger",
+      "name": "Webhook Trigger (On Demand)",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        180,
+        440
+      ],
+      "webhookId": "generate-whisprs"
+    },
+    {
+      "parameters": {
+        "jsCode": "const categories = [\n  'Solitude & Self-Discovery',\n  'Unspoken Feelings & Goodbyes',\n  'Late Night Epiphanies',\n  'Silent Battles & Healing',\n  'The Cosmic Perspective'\n];\n\nconst voices = [\n  'en-US-ChristopherNeural',\n  'en-US-JennyNeural',\n  'en-GB-RyanNeural',\n  'en-US-GuyNeural'\n];\n\nconst inputData = $input.item.json || {};\nconst query = inputData.query || {};\nconst body = inputData.body || inputData;\n\nconst selectedCategory = body.category || query.category || categories[Math.floor(Math.random() * categories.length)];\nconst selectedVoice = body.voice || query.voice || voices[Math.floor(Math.random() * voices.length)];\nconst customText = body.custom_text || query.custom_text || '';\nconst title = body.title || query.title || '';\n\nreturn {\n  json: {\n    category: selectedCategory,\n    voice: selectedVoice,\n    custom_text: customText,\n    title: title,\n    job_id: `job_${Date.now()}`,\n    triggered_at: new Date().toISOString()\n  }\n};"
+      },
+      "id": "node-select-parameters",
+      "name": "Select Pillar & Parameters",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        420,
+        340
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://host.docker.internal:5055/generate",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"category\": \"{{ $json.category }}\",\n  \"voice\": \"{{ $json.voice }}\",\n  \"custom_text\": \"{{ $json.custom_text }}\",\n  \"title\": \"{{ $json.title }}\"\n}",
+        "options": {
+          "timeout": 180000
+        }
+      },
+      "id": "node-render-engine",
+      "name": "Render Video (Whisprs Engine)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        660,
+        340
+      ]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "=http://host.docker.internal:5055/stream/{{ $json.video_id }}.mp4",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file",
+              "outputPropertyName": "video_file"
+            }
+          },
+          "timeout": 120000
+        }
+      },
+      "id": "node-fetch-binary",
+      "name": "Download Video Binary",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        900,
+        340
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const videoMeta = $input.item.json;\nconst files = videoMeta.files || {};\n\nconst formattedTags = Array.isArray(videoMeta.hashtags) \n  ? videoMeta.hashtags.join(' ') \n  : '#whisprs #poetry #quotes #deepthoughts #reels';\n\nconst fbReelsPayload = {\n  page_id: 'WHISPRS_PAGE_ID_PLACEHOLDER',\n  caption: `${videoMeta.hook}\\n\\n${videoMeta.title}\\n\\n\"${videoMeta.script}\"\\n\\nFollow @Whisprs for quiet reminders and late-night thoughts. 🖤\\n\\n${formattedTags}`,\n  video_url: `http://localhost:5055/stream/${videoMeta.video_id}.mp4`,\n  source_file: files.video_mp4\n};\n\nconst ytShortsPayload = {\n  snippet: {\n    title: `${videoMeta.title} | Whisprs Poetry #Shorts`,\n    description: `${videoMeta.caption}\\n\\n#shorts #poetry #whisprs`,\n    tags: videoMeta.hashtags || ['whisprs', 'poetry', 'solitude', 'healing'],\n    categoryId: '22'\n  },\n  status: {\n    privacyStatus: 'public',\n    selfDeclaredMadeForKids: false\n  }\n};\n\nreturn {\n  json: {\n    video_id: videoMeta.video_id,\n    title: videoMeta.title,\n    hook: videoMeta.hook,\n    category: videoMeta.category,\n    duration_seconds: videoMeta.duration_seconds,\n    caption: videoMeta.caption,\n    local_video_path: files.video_mp4,\n    local_thumb_path: files.thumbnail_jpg,\n    stream_url: `http://localhost:5055/stream/${videoMeta.video_id}.mp4`,\n    facebook_reels: fbReelsPayload,\n    youtube_shorts: ytShortsPayload,\n    status: 'READY_TO_PUBLISH'\n  },\n  binary: $input.item.binary\n};"
+      },
+      "id": "node-format-social",
+      "name": "Format Social Payloads",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1140,
+        340
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "firstIncomingItem",
+        "options": {}
+      },
+      "id": "node-respond-webhook",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        1380,
+        440
+      ]
+    }
+  ],
+  "connections": {
+    "Schedule Trigger (Daily 12h)": {
+      "main": [
+        [
+          {
+            "node": "Select Pillar & Parameters",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook Trigger (On Demand)": {
+      "main": [
+        [
+          {
+            "node": "Select Pillar & Parameters",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Select Pillar & Parameters": {
+      "main": [
+        [
+          {
+            "node": "Render Video (Whisprs Engine)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Render Video (Whisprs Engine)": {
+      "main": [
+        [
+          {
+            "node": "Download Video Binary",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download Video Binary": {
+      "main": [
+        [
+          {
+            "node": "Format Social Payloads",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Social Payloads": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

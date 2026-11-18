@@ -1,0 +1,232 @@
+{
+  "updatedAt": "2026-11-18T16:56:58.326Z",
+  "createdAt": "2026-11-18T16:56:58.325Z",
+  "id": "WhisprsStudioDispatcher",
+  "name": "Whisprs Studio - Automatic Buffer Queue Dispatcher",
+  "description": null,
+  "active": true,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "node-manual-trigger-dispatch",
+      "name": "When clicking ‘Execute Workflow’",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        200,
+        240
+      ]
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes",
+              "minutesInterval": 15
+            }
+          ]
+        }
+      },
+      "id": "node-schedule-trigger-dispatch",
+      "name": "Auto Check Buffer Every 15 Min",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        200,
+        440
+      ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "whisprs-dispatch-queue",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "node-webhook-trigger-dispatch",
+      "name": "Webhook Trigger (On Demand)",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        200,
+        640
+      ],
+      "webhookId": "whisprs-dispatch-webhook"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://host.docker.internal:5055/api/queue/dispatch",
+        "options": {
+          "timeout": 60000
+        }
+      },
+      "id": "node-call-dispatch-api",
+      "name": "Check Buffer Slots & Dispatch Whisprs Video",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        500,
+        440
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{ $json.dispatched }}",
+              "value2": true
+            }
+          ]
+        }
+      },
+      "id": "node-if-dispatched",
+      "name": "Was Video Dispatched?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        780,
+        440
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const res = $input.item.json;\nconsole.log(`[Whisprs Dispatcher] SUCCESS: ${res.message} (Due: ${res.dueAt})`);\nreturn {\n  json: {\n    status: 'SUCCESS',\n    jobId: res.jobId,\n    dueAt: res.dueAt,\n    dispatchedPosts: res.dispatchedPosts,\n    remainingPending: res.remainingPending,\n    timestamp: new Date().toISOString()\n  }\n};"
+      },
+      "id": "node-log-success",
+      "name": "Log Successful Whisprs Dispatch",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1040,
+        340
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const res = $input.item.json;\nconsole.log(`[Whisprs Dispatcher] IDLE: ${res.message}`);\nreturn {\n  json: {\n    status: 'IDLE',\n    reason: res.message,\n    pendingCount: res.pendingCount || 0,\n    timestamp: new Date().toISOString()\n  }\n};"
+      },
+      "id": "node-log-idle",
+      "name": "Log Whisprs Idle / Waiting",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1040,
+        540
+      ]
+    }
+  ],
+  "connections": {
+    "When clicking ‘Execute Workflow’": {
+      "main": [
+        [
+          {
+            "node": "Check Buffer Slots & Dispatch Whisprs Video",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Auto Check Buffer Every 15 Min": {
+      "main": [
+        [
+          {
+            "node": "Check Buffer Slots & Dispatch Whisprs Video",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook Trigger (On Demand)": {
+      "main": [
+        [
+          {
+            "node": "Check Buffer Slots & Dispatch Whisprs Video",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Buffer Slots & Dispatch Whisprs Video": {
+      "main": [
+        [
+          {
+            "node": "Was Video Dispatched?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Was Video Dispatched?": {
+      "main": [
+        [
+          {
+            "node": "Log Successful Whisprs Dispatch",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Log Whisprs Idle / Waiting",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": {
+    "node:Auto Check Buffer Every 15 Min": {
+      "recurrenceRules": [
+        null
+      ],
+      "recurrenceRuleSignatures": [
+        null
+      ]
+    }
+  },
+  "meta": null,
+  "nodeGroups": [],
+  "pinData": null,
+  "versionId": "whisprs-dispatcher-v1",
+  "activeVersionId": "158fa76e-9a13-4d59-8db8-65424e56df5b",
+  "versionCounter": 1,
+  "triggerCount": 2,
+  "sourceWorkflowId": null,
+  "tags": [],
+  "shared": [
+    {
+      "updatedAt": "2026-11-09T12:07:15.975Z",
+      "createdAt": "2026-11-09T12:07:15.975Z",
+      "role": "workflow:owner",
+      "workflowId": "QuranStudioDispatcher",
+      "projectId": "H3k9kdBZx44p1TdK",
+      "project": {
+        "updatedAt": "2026-09-06T13:14:49.594Z",
+        "createdAt": "2026-09-06T13:12:22.063Z",
+        "id": "H3k9kdBZx44p1TdK",
+        "name": "Josef white <josefpro809@gmail.com>",
+        "type": "personal",
+        "icon": null,
+        "description": null,
+        "customTelemetryTags": [],
+        "creatorId": "e025eedf-23ae-4089-8cb3-65273ddbd88e"
+      }
+    }
+  ],
+  "versionMetadata": {
+    "name": null,
+    "description": null
+  }
+}

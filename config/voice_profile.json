@@ -1,0 +1,39 @@
+{
+  "provider": "edge-tts",
+  "engine_type": "neural",
+  "default_voice": "en-US-ChristopherNeural",
+  "voice_matrix": {
+    "christopher": {
+      "id": "en-US-ChristopherNeural",
+      "gender": "male",
+      "locale": "en-US",
+      "character": "Deep, warm, introspective masculine whisper",
+      "recommended_rate": "-12%",
+      "recommended_pitch": "-2Hz"
+    },
+    "jenny": {
+      "id": "en-US-JennyNeural",
+      "gender": "female",
+      "locale": "en-US",
+      "character": "Soft, calm, poetic feminine whisper",
+      "recommended_rate": "-12%",
+      "recommended_pitch": "+0Hz"
+    },
+    "ryan": {
+      "id": "en-GB-RyanNeural",
+      "gender": "male",
+      "locale": "en-GB",
+      "character": "Contemplative, understated British male narrator",
+      "recommended_rate": "-10%",
+      "recommended_pitch": "-1Hz"
+    },
+    "guy": {
+      "id": "en-US-GuyNeural",
+      "gender": "male",
+      "locale": "en-US",
+      "character": "Emotive, gentle, relatable storytelling",
+      "recommended_rate": "-10%",
+      "recommended_pitch": "+0Hz"
+    }
+  }
+}

@@ -1,0 +1,197 @@
+{
+  "id": "WhisprsFlowStudioV3",
+  "name": "Whisprs 3.0 - Google Flow (Veo) & Qwen 0.6 Cloned Voice Master Pipeline",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 12
+            }
+          ]
+        }
+      },
+      "id": "node-schedule-trigger-v3",
+      "name": "Schedule Trigger (Daily 12h)",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        180,
+        240
+      ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "generate-whisprs-v3",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "node-webhook-trigger-v3",
+      "name": "Webhook Trigger (On Demand)",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        180,
+        440
+      ],
+      "webhookId": "generate-whisprs-v3"
+    },
+    {
+      "parameters": {
+        "jsCode": "const inputData = $input.item.json || {};\nconst query = inputData.query || {};\nconst body = inputData.body || inputData;\n\nconst title = body.title || query.title || \"Learning to Breathe\";\nconst customText = body.custom_text || query.custom_text || \"you don't have to carry the weight of everything - because some things were never meant to be held ... and when you feel tired in a world that never stops - remember that healing is just learning to breathe ... so let your heavy thoughts rest - tomorrow will be kinder\";\nconst category = body.category || query.category || \"Solitude & Healing\";\nconst promptIds = body.prompt_ids || query.prompt_ids || [6, 7, 8, 9, 10];\n\nreturn {\n  json: {\n    engine: \"google_flow_and_qwen_0.6\",\n    voice_engine: \"qwen_0.6_whisper_cloned\",\n    title: title,\n    category: category,\n    custom_text: customText,\n    prompt_ids: promptIds,\n    job_id: `job_flow_qwen_${Date.now()}`,\n    triggered_at: new Date().toISOString()\n  }\n};"
+      },
+      "id": "node-select-params-v3",
+      "name": "Select Parameters & Metadata",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        420,
+        340
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://host.docker.internal:5055/generate-flow-whisprs",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"job_id\": \"{{ $json.job_id }}\",\n  \"title\": \"{{ $json.title }}\",\n  \"category\": \"{{ $json.category }}\",\n  \"custom_text\": \"{{ $json.custom_text }}\",\n  \"prompt_ids\": {{ JSON.stringify($json.prompt_ids || []) }}\n}",
+        "options": {
+          "timeout": 300000
+        }
+      },
+      "id": "node-render-engine-v3",
+      "name": "Generate Master Reel (Flow + Qwen 0.6 Voice)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        680,
+        340
+      ]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "=http://host.docker.internal:5055/stream/{{ $json.video_id }}.mp4",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file",
+              "outputPropertyName": "video_file"
+            }
+          },
+          "timeout": 120000
+        }
+      },
+      "id": "node-fetch-binary-v3",
+      "name": "Download Master Reel Binary",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        940,
+        340
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const videoMeta = $input.item.json;\nconst files = videoMeta.files || {};\n\nconst formattedTags = Array.isArray(videoMeta.hashtags) \n  ? videoMeta.hashtags.join(' ') \n  : '#whisprs #poetry #quotes #deepthoughts #reels';\n\nconst fbReelsPayload = {\n  page_id: 'WHISPRS_PAGE_ID_PLACEHOLDER',\n  caption: `${videoMeta.hook}\\n\\n\"${videoMeta.script}\"\\n\\nFollow @Whisprs for quiet reminders and late-night thoughts. 🖤✨\\n\\n${formattedTags}`,\n  video_url: videoMeta.stream_url,\n  source_file: files.video_mp4\n};\n\nconst ytShortsPayload = {\n  snippet: {\n    title: `${videoMeta.title} | Whisprs Poetry #Shorts`,\n    description: `${videoMeta.caption}\\n\\n#shorts #poetry #whisprs #solitude`,\n    tags: videoMeta.hashtags || ['whisprs', 'poetry', 'solitude', 'healing'],\n    categoryId: '22'\n  },\n  status: {\n    privacyStatus: 'public',\n    selfDeclaredMadeForKids: false\n  }\n};\n\nreturn {\n  json: {\n    success: true,\n    engine: 'google_flow_and_qwen_0.6',\n    voice_engine: 'qwen_0.6_whisper_cloned',\n    video_id: videoMeta.video_id,\n    title: videoMeta.title,\n    hook: videoMeta.hook,\n    category: videoMeta.category,\n    duration_seconds: videoMeta.duration_seconds,\n    caption: videoMeta.caption,\n    stream_url: videoMeta.stream_url,\n    facebook_reels: fbReelsPayload,\n    youtube_shorts: ytShortsPayload,\n    status: 'READY_TO_PUBLISH'\n  },\n  binary: $input.item.binary\n};"
+      },
+      "id": "node-format-social-v3",
+      "name": "Format Social & Reel Payload",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1200,
+        340
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "firstIncomingItem",
+        "options": {}
+      },
+      "id": "node-respond-webhook-v3",
+      "name": "Respond to Webhook / Caller",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        1460,
+        340
+      ]
+    }
+  ],
+  "connections": {
+    "Schedule Trigger (Daily 12h)": {
+      "main": [
+        [
+          {
+            "node": "Select Parameters & Metadata",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook Trigger (On Demand)": {
+      "main": [
+        [
+          {
+            "node": "Select Parameters & Metadata",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Select Parameters & Metadata": {
+      "main": [
+        [
+          {
+            "node": "Generate Master Reel (Flow + Qwen 0.6 Voice)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Master Reel (Flow + Qwen 0.6 Voice)": {
+      "main": [
+        [
+          {
+            "node": "Download Master Reel Binary",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download Master Reel Binary": {
+      "main": [
+        [
+          {
+            "node": "Format Social & Reel Payload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Social & Reel Payload": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook / Caller",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

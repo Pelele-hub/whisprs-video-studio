@@ -1,0 +1,34 @@
+{
+  "items": [
+    {
+      "id": "whisprs_1795021973774_o2glaz",
+      "jobId": "whisprs_cloned_slow5_master_1794958363184",
+      "title": "Learning to Breathe | Whisprs",
+      "caption": "You don't have to carry the weight of everything.\n\n\"Because some things were never meant to be held. And when you feel tired in a world that never stops, remember that healing is just learning to breathe.\" 🖤✨\n\n#whisprs #poetry #quotes #deepthoughts #healing #solitude #reels #shorts",
+      "hook": "You don't have to carry the weight of everything",
+      "script": "You don't have to carry the weight of everything because some things were never meant to be held and when you feel tired in a world that never stops remember that healing is just learning to breathe so let your heavy thoughts rest tomorrow will be kinder",
+      "hashtags": "#whisprs #poetry #quotes #deepthoughts #reels #shorts",
+      "videoFilename": "whisprs_cloned_slow5_master_1794958363184.mp4",
+      "engine": "qwen_0.6b_cloned_whisper_slow5",
+      "status": "scheduled",
+      "createdAt": "2026-11-18T17:12:53.800Z",
+      "scheduledAt": "2026-11-18T17:15:37.495Z",
+      "scheduledDueAt": "2026-11-18T20:00:00.000Z",
+      "dispatchedPosts": [
+        {
+          "channel": "YouTube Shorts (Vesper's)",
+          "postId": "6afddd364b233b0b898aa809",
+          "dueAt": "2026-11-18T20:00:00.000Z",
+          "status": "success"
+        },
+        {
+          "channel": "Facebook Reels (Vesper)",
+          "postId": "6afddd37eb797e6b5a3f8229",
+          "dueAt": "2026-11-18T20:00:00.000Z",
+          "status": "success"
+        }
+      ]
+    }
+  ],
+  "updatedAt": "2026-11-18T17:15:37.495Z"
+}

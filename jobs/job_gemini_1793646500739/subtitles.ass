@@ -1,0 +1,26 @@
+[Script Info]
+Title: Whisprs Gemini Synchronized Subtitles
+ScriptType: v4.00+
+WrapStyle: 0
+ScaledBorderAndShadow: yes
+YCbCr Matrix: None
+PlayResX: 1080
+PlayResY: 1920
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: WhisprsItalic,Georgia,50,&H00FFFFFF,&H0000FFFF,&H80000000,&H90000000,0,1,0,0,100,100,0.8,0,1,1.2,2.5,2,80,80,900,1
+Style: WhisprsWatermark,Segoe Script,28,&H70FFFFFF,&H0000FFFF,&H00000000,&H80000000,0,1,0,0,100,100,1.0,0,1,1.0,1.5,2,80,80,260,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.00,0:0:00:25.78,WhisprsWatermark,,0,0,0,,@Whisprs
+Dialogue: 0,0:00:00.00,0:00:03.10,WhisprsItalic,,0,0,0,,{\i1}Not every season is\Nmeant for blooming.
+Dialogue: 0,0:00:03.61,0:00:06.44,WhisprsItalic,,0,0,0,,{\i1}Some seasons are just\Nfor resting, for staying
+Dialogue: 0,0:00:06.04,0:00:07.98,WhisprsItalic,,0,0,0,,{\i1}rooted through the coldest nights.
+Dialogue: 0,0:00:08.67,0:00:10.92,WhisprsItalic,,0,0,0,,{\i1}You don't have to\Nhave it all figured
+Dialogue: 0,0:00:10.52,0:00:11.68,WhisprsItalic,,0,0,0,,{\i1}out right now.
+Dialogue: 0,0:00:12.12,0:00:15.38,WhisprsItalic,,0,0,0,,{\i1}You're still growing even\Nin the quiet dark.
+Dialogue: 0,0:00:15.94,0:00:18.19,WhisprsItalic,,0,0,0,,{\i1}Be proud of how\Nfar you've come.
+Dialogue: 0,0:00:18.89,0:00:21.47,WhisprsItalic,,0,0,0,,{\i1}Soften your shoulders,\Nclose your eyes.
+Dialogue: 0,0:00:22.08,0:00:24.35,WhisprsItalic,,0,0,0,,{\i1}Everything can wait until tomorrow.

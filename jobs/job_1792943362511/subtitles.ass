@@ -1,0 +1,29 @@
+[Script Info]
+Title: Whisprs Production Subtitles
+ScriptType: v4.00+
+WrapStyle: 0
+ScaledBorderAndShadow: yes
+YCbCr Matrix: None
+PlayResX: 1080
+PlayResY: 1920
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: WhisprsItalic,Georgia,46,&H00FFFFFF,&H0000FFFF,&H80000000,&H90000000,0,1,0,0,100,100,0.8,0,1,1,2.5,2,80,80,920,1
+Style: WhisprsWatermark,Segoe Script,28,&H70FFFFFF,&H0000FFFF,&H00000000,&H80000000,0,1,0,0,100,100,1.0,0,1,1.0,1.5,2,80,80,260,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.00,0:01:00.00,WhisprsWatermark,,0,0,0,,@Whisprs
+Dialogue: 0,0:00:00.10,0:00:01.88,WhisprsItalic,,0,0,0,,{\i1}We never know\Nhow much
+Dialogue: 0,0:00:01.88,0:00:03.42,WhisprsItalic,,0,0,0,,{\i1}someone is holding,
+Dialogue: 0,0:00:03.42,0:00:05.37,WhisprsItalic,,0,0,0,,{\i1}behind a polite\Nsmile or
+Dialogue: 0,0:00:05.37,0:00:06.58,WhisprsItalic,,0,0,0,,{\i1}a quiet glance.
+Dialogue: 0,0:00:06.53,0:00:08.66,WhisprsItalic,,0,0,0,,{\i1}The strongest people\Naren't the
+Dialogue: 0,0:00:08.66,0:00:10.24,WhisprsItalic,,0,0,0,,{\i1}ones who\Nnever broke...
+Dialogue: 0,0:00:10.24,0:00:11.88,WhisprsItalic,,0,0,0,,{\i1}but the ones\Nwho learned
+Dialogue: 0,0:00:11.88,0:00:13.39,WhisprsItalic,,0,0,0,,{\i1}to rebuild\Nin silence.
+Dialogue: 0,0:00:13.39,0:00:15.62,WhisprsItalic,,0,0,0,,{\i1}Be gentle with\Nwho you
+Dialogue: 0,0:00:15.62,0:00:16.12,WhisprsItalic,,0,0,0,,{\i1}meet.
+Dialogue: 0,0:00:16.12,0:00:18.90,WhisprsItalic,,0,0,0,,{\i1}Sometimes, surviving\Nthe day...
+Dialogue: 0,0:00:18.90,0:00:21.23,WhisprsItalic,,0,0,0,,{\i1}is their\Ngreatest victory.

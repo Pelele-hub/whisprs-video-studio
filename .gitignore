@@ -1,0 +1,20 @@
+# Environments & Credentials
+.env
+.env.*
+
+# Dependencies & Binaries
+node_modules/
+bin/
+
+# Temporary & Scratch caches
+scratch/
+__pycache__/
+*.pyc
+*.tmp
+*.log
+
+# Heavy Media Files (Uploaded to GitHub Release Vault instead)
+output/
+reference_videos/
+reference_analysis/
+audio/*.wav

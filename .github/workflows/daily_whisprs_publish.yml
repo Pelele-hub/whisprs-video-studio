@@ -1,0 +1,36 @@
+name: Whisprs 8AM & 8PM Daily Publisher
+
+on:
+  schedule:
+    # 08:00 and 20:00 UTC = 8:00 AM & 8:00 PM Casablanca time
+    - cron: '0 8,20 * * *'
+  workflow_dispatch: # Allows manual trigger from GitHub Actions tab anytime
+
+permissions:
+  contents: write # Needed to commit updated queue status
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Run Cloud Publisher (YouTube Shorts & Facebook Reels)
+        env:
+          BUFFER_WHISPRS_TOKEN: ${{ secrets.BUFFER_WHISPRS_TOKEN || secrets.BUFFER_TOKEN }}
+        run: |
+          node scripts/cloud_whisprs_publisher.mjs
+
+      - name: Commit & Push Updated Queue
+        run: |
+          git config --global user.name "Whisprs Studio Bot"
+          git config --global user.email "bot@whisprs.local"
+          git add jobs/whisprs_cloud_publish_queue.json
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-published Whisprs reel [skip ci]" && git push)

@@ -1,0 +1,274 @@
+{
+  "id": "V2WhisprsProd99",
+  "name": "Whisprs V2 Production & Auto-Publishing Pipeline",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "node-manual-trigger",
+      "name": "When clicking ‘Execute Workflow’",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        180,
+        240
+      ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "generate-whisprs-v2",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "node-webhook-trigger",
+      "name": "Webhook Trigger (On Demand / CLI)",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        180,
+        440
+      ],
+      "webhookId": "generate-whisprs-v2"
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 12
+            }
+          ]
+        }
+      },
+      "id": "node-schedule-trigger",
+      "name": "Schedule Trigger (Every 12h)",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        180,
+        640
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const incoming = $input.item.json || {};\n\nreturn {\n  json: {\n    title: incoming.title || \"You're Not Out of Time\",\n    hook: incoming.hook || \"Just because you took longer than others...\",\n    category: incoming.category || \"Patience & Healing\",\n    voice_engine: \"authentic_original_reel\",\n    music_soundtrack: \"breathe_and_allow_things_to_pass_denoised\",\n    scenes: [\n      {\n        scene_id: 1,\n        scene_description: \"retro 90s anime aesthetic, lonely girl under umbrella in rainy city at night, deep teal tone and warm amber streetlamp reflections\",\n        duration: 4.3\n      },\n      {\n        scene_id: 2,\n        scene_description: \"retro 90s anime aesthetic, solitary boy standing in doorway looking down, moody melancholic cel-shaded lighting\",\n        duration: 4.3\n      },\n      {\n        scene_id: 3,\n        scene_description: \"retro 90s anime aesthetic, elderly shopkeeper sitting alone inside cozy warm corner store at night, rain outside\",\n        duration: 4.3\n      },\n      {\n        scene_id: 4,\n        scene_description: \"retro 90s anime aesthetic, hooded youth sitting on wet curb under glowing neon sign, lo-fi anime art style\",\n        duration: 4.3\n      },\n      {\n        scene_id: 5,\n        scene_description: \"retro 90s anime aesthetic, solitary character leaning on apartment balcony gazing at twilight horizon and gentle clouds\",\n        duration: 4.3\n      }\n    ],\n    aspect_ratio: \"9:16\",\n    resolution: \"1080x1920\",\n    created_at: new Date().toISOString()\n  }\n};"
+      },
+      "id": "node-config-parameters",
+      "name": "Configure V2 Pipeline Parameters",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        440,
+        440
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://host.docker.internal:8000/generate-visuals",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"gemini-nano-banana-2.1\",\n  \"scenes\": {{ JSON.stringify($json.scenes) }}\n}",
+        "options": {
+          "timeout": 180000
+        }
+      },
+      "id": "node-nano-banana-images",
+      "name": "Generate Visuals (Gemini Nano Banana)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        680,
+        440
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://host.docker.internal:5055/generate-v2",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"title\": \"{{ $('Configure V2 Pipeline Parameters').item.json.title }}\",\n  \"hook\": \"{{ $('Configure V2 Pipeline Parameters').item.json.hook }}\",\n  \"category\": \"{{ $('Configure V2 Pipeline Parameters').item.json.category }}\",\n  \"character_scenes\": {{ JSON.stringify($json.scenes.map(s => s.image_path)) }}\n}",
+        "options": {
+          "timeout": 300000
+        }
+      },
+      "id": "node-render-engine-v2",
+      "name": "Render Video (Whisprs V2 Engine)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        920,
+        440
+      ]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "=http://host.docker.internal:5055/stream/{{ $json.video_id }}.mp4",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file",
+              "outputPropertyName": "video_file"
+            }
+          },
+          "timeout": 120000
+        }
+      },
+      "id": "node-download-binary",
+      "name": "Download Video Binary",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1160,
+        440
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const videoMeta = $input.item.json;\nconst files = videoMeta.files || {};\n\nconst formattedTags = Array.isArray(videoMeta.hashtags) \n  ? videoMeta.hashtags.join(' ') \n  : '#whisprs #poetry #quotes #deepthoughts #reels #solitude';\n\nconst captionFull = `${videoMeta.hook}\\n\\n\"${videoMeta.script}\"\\n\\nFollow @Whisprs for quiet reminders and late-night thoughts. 🖤\\n\\n${formattedTags}`;\n\n// Structured payload ready for Zapier Webhooks & Social Automation\nconst zapierPayload = {\n  event: 'NEW_WHISPRS_VIDEO',\n  video_id: videoMeta.video_id,\n  title: videoMeta.title,\n  hook: videoMeta.hook,\n  caption: captionFull,\n  hashtags: formattedTags,\n  duration_seconds: videoMeta.duration_seconds,\n  stream_url: `http://localhost:5055/stream/${videoMeta.video_id}.mp4`,\n  thumbnail_url: `http://localhost:5055/stream/${videoMeta.video_id}_thumb.jpg`,\n  local_file_path: files.video_mp4,\n  platforms: ['facebook_reels', 'youtube_shorts', 'instagram_reels', 'tiktok'],\n  timestamp: new Date().toISOString()\n};\n\nreturn {\n  json: {\n    success: true,\n    video_id: videoMeta.video_id,\n    title: videoMeta.title,\n    duration_seconds: videoMeta.duration_seconds,\n    stream_url: `http://localhost:5055/stream/${videoMeta.video_id}.mp4`,\n    local_file: files.video_mp4,\n    desktop_file: files.desktop_mp4,\n    caption: captionFull,\n    zapier_payload: zapierPayload,\n    status: 'READY_FOR_ZAPIER_PUBLISHING'\n  },\n  binary: $input.item.binary\n};"
+      },
+      "id": "node-format-zapier-payload",
+      "name": "Format Zapier & Social Payload",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1400,
+        440
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://hooks.zapier.com/hooks/catch/ZAPIER_WEBHOOK_PLACEHOLDER/",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($json.zapier_payload) }}",
+        "options": {}
+      },
+      "id": "node-zapier-publisher",
+      "name": "Zapier Webhook (Auto-Publish)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1640,
+        320
+      ],
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "respondWith": "firstIncomingItem",
+        "options": {}
+      },
+      "id": "node-respond-webhook",
+      "name": "Respond to Webhook / Caller",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        1640,
+        560
+      ]
+    }
+  ],
+  "connections": {
+    "When clicking ‘Execute Workflow’": {
+      "main": [
+        [
+          {
+            "node": "Configure V2 Pipeline Parameters",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook Trigger (On Demand / CLI)": {
+      "main": [
+        [
+          {
+            "node": "Configure V2 Pipeline Parameters",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger (Every 12h)": {
+      "main": [
+        [
+          {
+            "node": "Configure V2 Pipeline Parameters",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Configure V2 Pipeline Parameters": {
+      "main": [
+        [
+          {
+            "node": "Generate Visuals (Gemini Nano Banana)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Visuals (Gemini Nano Banana)": {
+      "main": [
+        [
+          {
+            "node": "Render Video (Whisprs V2 Engine)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Render Video (Whisprs V2 Engine)": {
+      "main": [
+        [
+          {
+            "node": "Download Video Binary",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download Video Binary": {
+      "main": [
+        [
+          {
+            "node": "Format Zapier & Social Payload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Zapier & Social Payload": {
+      "main": [
+        [
+          {
+            "node": "Zapier Webhook (Auto-Publish)",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Respond to Webhook / Caller",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}
