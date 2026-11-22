@@ -218,9 +218,24 @@
       "videoFilename": "whisprs_batch10_reel_07.mp4",
       "cloudVideoUrl": "https://github.com/Pelele-hub/whisprs-video-studio/releases/download/whisprs-stock-videos/whisprs_batch10_reel_07.mp4",
       "engine": "qwen_0.6b_cloned_whisper_slow5",
-      "status": "pending",
+      "status": "published",
       "scheduledSlot": "2026-11-22T08:00:00.000Z",
-      "createdAt": "2026-11-18T23:35:53.604Z"
+      "createdAt": "2026-11-18T23:35:53.604Z",
+      "publishedAt": "2026-11-22T15:55:21.232Z",
+      "dispatchedPosts": [
+        {
+          "channel": "YouTube Shorts (Vesper's)",
+          "channelId": "6afb0092ece6dfde5fe41003",
+          "postId": "6b03105dcc364169c166e800",
+          "status": "sent"
+        },
+        {
+          "channel": "Facebook Reels (Vesper)",
+          "channelId": "6afb007cece6dfde5fe40e7d",
+          "postId": "6b03105fcc364169c166e8a1",
+          "status": "sent"
+        }
+      ]
     },
     {
       "id": "whisprs_whisprs_batch10_reel_08_1795044953604",
@@ -591,5 +606,5 @@
       "dispatchedPosts": []
     }
   ],
-  "updatedAt": "2026-11-22T00:04:31.936Z"
+  "updatedAt": "2026-11-22T15:55:21.232Z"
 }
