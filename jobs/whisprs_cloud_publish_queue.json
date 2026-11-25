@@ -431,11 +431,27 @@
       "videoFilename": "whisprs_anime_clean_1795125740435.mp4",
       "cloudVideoUrl": "https://github.com/Pelele-hub/whisprs-video-studio/releases/download/whisprs-stock-videos/whisprs_anime_clean_1795125740435.mp4",
       "engine": "google_flow_and_qwen_0.6",
-      "status": "pending",
+      "status": "scheduled",
       "createdAt": "2026-11-21T16:19:24.888Z",
-      "scheduledSlot": null,
-      "scheduledDueAt": null,
-      "dispatchedPosts": []
+      "scheduledSlot": "2026-11-26T08:00:00.000Z",
+      "scheduledDueAt": "2026-11-26T08:00:00.000Z",
+      "dispatchedPosts": [
+        {
+          "channel": "YouTube Shorts (Vesper's)",
+          "channelId": "6afb0092ece6dfde5fe41003",
+          "postId": "6b075b4e07071a60672f9deb",
+          "dueAt": "2026-11-26T08:00:00.000Z",
+          "status": "scheduled"
+        },
+        {
+          "channel": "Facebook Reels (Vesper)",
+          "channelId": "6afb007cece6dfde5fe40e7d",
+          "postId": "6b075b4f9f6dda31cc9ddca2",
+          "dueAt": "2026-11-26T08:00:00.000Z",
+          "status": "scheduled"
+        }
+      ],
+      "scheduledAt": "2026-11-25T22:03:59.980Z"
     },
     {
       "id": "whisprs_1795277964888_v3yl8x",
@@ -448,11 +464,27 @@
       "videoFilename": "whisprs_anime_clean_1795127495099.mp4",
       "cloudVideoUrl": "https://github.com/Pelele-hub/whisprs-video-studio/releases/download/whisprs-stock-videos/whisprs_anime_clean_1795127495099.mp4",
       "engine": "google_flow_and_qwen_0.6",
-      "status": "pending",
+      "status": "scheduled",
       "createdAt": "2026-11-21T16:19:24.888Z",
-      "scheduledSlot": null,
-      "scheduledDueAt": null,
-      "dispatchedPosts": []
+      "scheduledSlot": "2026-11-26T20:00:00.000Z",
+      "scheduledDueAt": "2026-11-26T20:00:00.000Z",
+      "dispatchedPosts": [
+        {
+          "channel": "YouTube Shorts (Vesper's)",
+          "channelId": "6afb0092ece6dfde5fe41003",
+          "postId": "6b075b50d4eda4b659b427a7",
+          "dueAt": "2026-11-26T20:00:00.000Z",
+          "status": "scheduled"
+        },
+        {
+          "channel": "Facebook Reels (Vesper)",
+          "channelId": "6afb007cece6dfde5fe40e7d",
+          "postId": "6b075b51b8e2338b856812ee",
+          "dueAt": "2026-11-26T20:00:00.000Z",
+          "status": "scheduled"
+        }
+      ],
+      "scheduledAt": "2026-11-25T22:04:01.920Z"
     },
     {
       "id": "whisprs_1795277964888_jw0r7f",
@@ -693,5 +725,5 @@
       "dispatchedPosts": []
     }
   ],
-  "updatedAt": "2026-11-25T18:24:52.530Z"
+  "updatedAt": "2026-11-25T22:04:01.920Z"
 }

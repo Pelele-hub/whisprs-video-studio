@@ -1,9 +1,10 @@
-name: Whisprs 8AM & 8PM Daily Publisher
+name: Whisprs 8AM & 8PM Buffer Scheduler
 
 on:
   schedule:
-    # 08:00 and 20:00 UTC = 8:00 AM & 8:00 PM Casablanca time
-    - cron: '0 8,20 * * *'
+    # Run ~6.7 hours ahead of 08:00 & 20:00 Africa/Casablanca at off-peak :17
+    # so Buffer holds exact 8:00 AM & 8:00 PM scheduled posts regardless of GitHub cron delays
+    - cron: '17 1,13 * * *'
   workflow_dispatch: # Allows manual trigger from GitHub Actions tab anytime
 
 permissions:
@@ -22,7 +23,7 @@ jobs:
         with:
           node-version: 20
 
-      - name: Run Cloud Publisher (YouTube Shorts & Facebook Reels)
+      - name: Schedule Upcoming Posts in Buffer (8AM & 8PM Casablanca)
         env:
           BUFFER_WHISPRS_TOKEN: ${{ secrets.BUFFER_WHISPRS_TOKEN || secrets.BUFFER_TOKEN }}
         run: |
@@ -33,4 +34,4 @@ jobs:
           git config --global user.name "Whisprs Studio Bot"
           git config --global user.email "bot@whisprs.local"
           git add jobs/whisprs_cloud_publish_queue.json
-          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-published Whisprs reel [skip ci]" && git push)
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-scheduled Whisprs reel in Buffer [skip ci]" && git push)
