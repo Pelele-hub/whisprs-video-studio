@@ -2,9 +2,8 @@ name: Whisprs 8AM & 8PM Buffer Scheduler
 
 on:
   schedule:
-    # Run ~6.7 hours ahead of 08:00 & 20:00 Africa/Casablanca at off-peak :17
-    # so Buffer holds exact 8:00 AM & 8:00 PM scheduled posts regardless of GitHub cron delays
-    - cron: '17 1,13 * * *'
+    # Run right after 08:00 & 20:00 Casablanca publish times (+ backup windows in case of GitHub cron delays)
+    - cron: '23 1,9,13,21 * * *'
   workflow_dispatch: # Allows manual trigger from GitHub Actions tab anytime
 
 permissions:
@@ -18,10 +17,10 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js 20
+      - name: Setup Node.js 24
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
 
       - name: Schedule Upcoming Posts in Buffer (8AM & 8PM Casablanca)
         env:

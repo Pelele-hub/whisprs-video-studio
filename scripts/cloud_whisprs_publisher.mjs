@@ -168,13 +168,13 @@ function isSlotSafe(slotDate, postsByChannel, youtubeChannelId) {
 
   const trailing24hCount = ytPosts.filter(p => {
     const t = getPostTimestampMs(p);
-    return Number.isFinite(t) && t <= slotMs && (slotMs - t) < (oneDayMs - 60 * 1000);
+    return Number.isFinite(t) && t <= slotMs && (slotMs - t) < (oneDayMs - 15 * 60 * 1000);
   }).length;
   if (trailing24hCount >= YOUTUBE_DAILY_MAX) return false;
 
   const forward24hCount = ytPosts.filter(p => {
     const t = getPostTimestampMs(p);
-    return Number.isFinite(t) && t >= slotMs && (t - slotMs) < (oneDayMs - 60 * 1000);
+    return Number.isFinite(t) && t >= slotMs && (t - slotMs) < (oneDayMs - 15 * 60 * 1000);
   }).length;
   if (forward24hCount >= YOUTUBE_DAILY_MAX) return false;
 
